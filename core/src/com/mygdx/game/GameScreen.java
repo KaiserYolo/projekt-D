@@ -5,9 +5,11 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -20,6 +22,7 @@ public class GameScreen extends ScreenAdapter {
     public MenuScreen menuScreen;
     public Player player;
     public OrthographicCamera camera;
+    public Slime slime;
 
     public GameScreen(MenuScreen menuScreen){
         this.menuScreen = menuScreen;
@@ -30,6 +33,7 @@ public class GameScreen extends ScreenAdapter {
         batch = new SpriteBatch();
         controls = new Controls(this);
         player = new Player();
+        slime = new Slime();
     }
 
     @Override
@@ -39,22 +43,41 @@ public class GameScreen extends ScreenAdapter {
         camera.update();
         controls.playerMovement(delta);
         Vector2 playerPosition = controls.getPlayerPosition();
-        System.out.println(playerPosition);
+        float degree = (float)Math.atan2((Gdx.graphics.getHeight() - Gdx.input.getY()) - (playerPosition.y+20), Gdx.input.getX() - (playerPosition.x +120))* MathUtils.radiansToDegrees;
+        /*
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         shapeRenderer.setProjectionMatrix(camera.combined);
         shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.rect(playerPosition.x,playerPosition.y,100,100);
-        float degree = (float)Math.atan2((Gdx.graphics.getHeight() - Gdx.input.getY()) - (playerPosition.y+20), Gdx.input.getX() - (playerPosition.x +120))* MathUtils.radiansToDegrees;
-        System.out.println(degree);
         shapeRenderer.rect( playerPosition.x+120,playerPosition.y+20,
                             0,0,
                             20,150,
                             1.0f,1.0f,
                             degree- 90);
+        shapeRenderer.setColor(Color.RED);
         shapeRenderer.end();
+        */
         batch.begin();
-        batch.draw(player.playerA, 0, 0);
+        player.render(delta, batch, playerPosition, degree);
+        slime.render(delta, batch);
         batch.end();
+        collision();
+    }
+
+    public void collision(){
+        boolean collisionPlayerSlime = player.playerSprite.getBoundingRectangle().overlaps(slime.slimeSprite.getBoundingRectangle());
+        //System.out.println(collisionPlayerSlime);
+        if (collisionPlayerSlime){
+            player.damage();
+        }
+
+    }
+    public void collisionSword(){
+        boolean collisionSwordSlime = player.swordSprite.getBoundingRectangle().overlaps(slime.slimeSprite.getBoundingRectangle());
+        System.out.println(collisionSwordSlime);
+        if(collisionSwordSlime){
+            slime.damage();
+        }
     }
 
     @Override

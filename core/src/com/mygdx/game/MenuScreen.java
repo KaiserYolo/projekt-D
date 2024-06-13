@@ -38,7 +38,6 @@ public class MenuScreen extends ScreenAdapter {
         startGameAction();
     }
 
-
     @Override
     public void render(float delta) {
         ScreenUtils.clear(0, 0, 0, 1);
@@ -46,7 +45,6 @@ public class MenuScreen extends ScreenAdapter {
         batch.end();
         stage.draw();
     }
-
 
     @Override
     public void dispose() {

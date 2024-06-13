@@ -42,13 +42,13 @@ public class Controls {
             }
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)){
-            //Gdx.app.exit();
-            Main.INSTANCE.setScreen(new MenuScreen()); // könnte nen neues Objekt machen
+            Gdx.app.exit();
+            //Main.INSTANCE.setScreen(new MenuScreen()); // könnte nen neues Objekt machen
         }
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-
+            gameScreen.collisionSword();
         }
-        //if (Gdx.input.getX()){}
+
 
     }
 

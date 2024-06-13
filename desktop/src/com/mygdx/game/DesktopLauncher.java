@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.tools.texturepacker.TexturePacker;
 import com.mygdx.game.Main;
 
-// Please note that on macOS your application needs to be started with the -XstartOnFirstThread JVM argument
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		TexturePacker.Settings settings = new TexturePacker.Settings();
@@ -14,15 +13,15 @@ public class DesktopLauncher {
 		settings.maxWidth = 4096;
 		settings.edgePadding = true;
 		settings.filterMin = Texture.TextureFilter.Linear;
-		settings.filterMag = Texture.TextureFilter.Linear;
-		TexturePacker.process(settings, "Soldier/Soldier with shadows",".","Solider");
+		TexturePacker.process(settings, "knight",".","knight");
+		TexturePacker.process(settings, "enemies/slime",".","slime");
 
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.useVsync(true);
 		config.setTitle("projekt-D");
-		//config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
-		//config.setWindowIcon();
+		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+		config.setWindowIcon("knight/knight_idle_anim_0.png");
 		config.setResizable(true);
 		new Lwjgl3Application(new Main(), config);
 	}
