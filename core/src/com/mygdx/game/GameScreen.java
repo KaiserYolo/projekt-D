@@ -18,6 +18,7 @@ public class GameScreen extends ScreenAdapter {
     public SpriteBatch batch;
     public Controls controls;
     public MenuScreen menuScreen;
+    public Player player;
     public OrthographicCamera camera;
 
     public GameScreen(MenuScreen menuScreen){
@@ -28,6 +29,7 @@ public class GameScreen extends ScreenAdapter {
         shapeRenderer = new ShapeRenderer();
         batch = new SpriteBatch();
         controls = new Controls(this);
+        player = new Player();
     }
 
     @Override
@@ -50,6 +52,9 @@ public class GameScreen extends ScreenAdapter {
                             1.0f,1.0f,
                             degree- 90);
         shapeRenderer.end();
+        batch.begin();
+        batch.draw(player.playerA, 0, 0);
+        batch.end();
     }
 
     @Override
