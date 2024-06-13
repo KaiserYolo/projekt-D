@@ -22,4 +22,8 @@ public class Main extends Game {
 		setScreen(new MenuScreen());
 
 	}
+	@Override
+	public void render(){
+		super.render();
+	}
 }

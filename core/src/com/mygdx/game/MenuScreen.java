@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -13,8 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import java.awt.*;
-
 public class MenuScreen extends ScreenAdapter {
 
     SpriteBatch batch;
@@ -23,8 +20,10 @@ public class MenuScreen extends ScreenAdapter {
     TextButton.TextButtonStyle startGameS;
     BitmapFont font;
     Table table;
+    MenuScreen menuScreen;
 
     public MenuScreen() {
+        menuScreen = this;
         batch = new SpriteBatch();
         table = new Table();
         table.setFillParent(true);
@@ -37,8 +36,8 @@ public class MenuScreen extends ScreenAdapter {
         table.add(startGame);
         stage.addActor(table);
         startGameAction();
-
     }
+
 
     @Override
     public void render(float delta) {
@@ -47,6 +46,7 @@ public class MenuScreen extends ScreenAdapter {
         batch.end();
         stage.draw();
     }
+
 
     @Override
     public void dispose() {
@@ -65,7 +65,7 @@ public class MenuScreen extends ScreenAdapter {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 System.out.println("Button pressed");
-                Main.INSTANCE.setScreen(new GameScreen());
+                Main.INSTANCE.setScreen(new GameScreen(menuScreen));
             }
         });
     }
