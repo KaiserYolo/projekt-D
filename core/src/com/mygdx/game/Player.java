@@ -68,6 +68,7 @@ public class Player {
         z++;
         if (leben == 0){
             //Gdx.app.exit();
+            Main.INSTANCE.setScreen(new MenuScreen());
         }
     }
 }

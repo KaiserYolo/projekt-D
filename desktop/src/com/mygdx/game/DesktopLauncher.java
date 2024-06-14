@@ -15,6 +15,9 @@ public class DesktopLauncher {
 		settings.filterMin = Texture.TextureFilter.Linear;
 		TexturePacker.process(settings, "knight",".","knight");
 		TexturePacker.process(settings, "enemies/slime",".","slime");
+		TexturePacker.process(settings, "tiles/floor",".","floor");
+		TexturePacker.process(settings,"tiles/wall",".","wall");
+		TexturePacker.process(settings,"menu",".","menu.atlas");
 
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
@@ -23,6 +26,7 @@ public class DesktopLauncher {
 		config.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
 		config.setWindowIcon("knight/knight_idle_anim_0.png");
 		config.setResizable(true);
+		//config.setWindowSizeLimits(800,600,800,600);
 		new Lwjgl3Application(new Main(), config);
 	}
 }

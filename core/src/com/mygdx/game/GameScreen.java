@@ -21,6 +21,7 @@ public class GameScreen extends ScreenAdapter {
     public Controls controls;
     public MenuScreen menuScreen;
     public Player player;
+    public Level level;
     public OrthographicCamera camera;
     public Slime slime;
 
@@ -33,7 +34,8 @@ public class GameScreen extends ScreenAdapter {
         batch = new SpriteBatch();
         controls = new Controls(this);
         player = new Player();
-        slime = new Slime();
+        slime = new Slime(this);
+        level = new Level();
     }
 
     @Override
@@ -58,15 +60,17 @@ public class GameScreen extends ScreenAdapter {
         shapeRenderer.end();
         */
         batch.begin();
+        level.renderLevel(batch);
         player.render(delta, batch, playerPosition, degree);
-        slime.render(delta, batch);
+        slime.render(delta, batch, playerPosition);
         batch.end();
         collision();
+        System.out.print(Gdx.graphics.getWidth());
+        System.out.println(Gdx.graphics.getHeight());
     }
 
     public void collision(){
         boolean collisionPlayerSlime = player.playerSprite.getBoundingRectangle().overlaps(slime.slimeSprite.getBoundingRectangle());
-        //System.out.println(collisionPlayerSlime);
         if (collisionPlayerSlime){
             player.damage();
         }
