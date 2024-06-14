@@ -8,6 +8,7 @@ import com.mygdx.game.Main;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
+		/*
 		TexturePacker.Settings settings = new TexturePacker.Settings();
 		settings.maxHeight = 4096;
 		settings.maxWidth = 4096;
@@ -19,6 +20,8 @@ public class DesktopLauncher {
 		TexturePacker.process(settings,"tiles/wall",".","wall");
 		TexturePacker.process(settings,"menu",".","menu.atlas");
 
+		Tools are off in the gradle.build
+		*/
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 		config.useVsync(true);
